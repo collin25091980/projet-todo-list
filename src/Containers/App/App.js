@@ -21,8 +21,11 @@ function App() {
       setTasks(newTasks);
     }
 
-
-
+    const doneClickHandler = index => {
+      const newTasks = [...tasks];
+      newTasks[index].done = !newTasks[index].done;
+      setTasks(newTasks);
+    }
 
 
     // Variables
@@ -32,6 +35,7 @@ function App() {
         done={task.done}
         key={index}
         removedClick={() => removeClickHandler(index)}
+        donedClick={() => doneClickHandler(index)}
       />
     ));
 
