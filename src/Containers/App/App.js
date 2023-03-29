@@ -28,12 +28,14 @@ function App() {
 
     const submitFormHandler = e => {
       e.preventDefault();
-      const newTask = {
-        content: input,
-        done: false
+      if(input){
+        const newTask = {
+          content: input,
+          done: false
+        }
+        setTasks([...tasks,newTask]);
+        setInput('');
       }
-      setTasks([...tasks,newTask]);
-      setInput('');
     }
 
 
