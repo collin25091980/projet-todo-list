@@ -6,13 +6,8 @@ import Task from '../../Components/Task/Task';
 
 function App() {
     // State 
-    const [tasks, setTasks] = useState([
-        {content: "Aller chercher les courses", done: false},
-        {content: "Aller chercher les courses", done: false},
-        {content: "Aller chercher les courses", done: false},
-        {content: "Aller chercher les courses", done: true}
-      ]
-    );
+    const [tasks, setTasks] = useState([]);
+    const [input, setInput] = useState('');
 
     // Functions
     const removeClickHandler = index => {
@@ -26,6 +21,21 @@ function App() {
       newTasks[index].done = !newTasks[index].done;
       setTasks(newTasks);
     }
+
+    const changedFormHanlder = e => {
+      setInput(e.target.value);
+    }
+
+    const submitFormHandler = e => {
+      e.preventDefault();
+      const newTask = {
+        content: input,
+        done: false
+      }
+      setTasks([...tasks,newTask]);
+      setInput('');
+    }
+
 
 
     // Variables
@@ -48,8 +58,13 @@ function App() {
       </header>
 
       <div className={classes.add}>
-        <form>
-          <input type="text" placeholder="Que souhaitez-vous ajouter ?" />
+        <form onSubmit={(e) => submitFormHandler(e)}>
+          <input 
+            type="text" 
+            placeholder="Que souhaitez-vous ajouter ?" 
+            value={input}
+            onChange={(e) => changedFormHanlder(e)}
+          />
           <button type="submit">
             Ajouter
           </button>
